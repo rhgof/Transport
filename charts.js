@@ -48,7 +48,7 @@ VehicleReg.charts = {
     } else {
       legend = { font: { size: 10 }, orientation: 'h', y: -0.18, x: 0.5, xanchor: 'center', traceorder: 'normal' };
     }
-    var bottomMargin = isDetail ? (hasBottomLegend ? 70 : 40) : 25;
+    var bottomMargin = isDetail ? (hasBottomLegend ? 80 : 55) : 25;
     return {
       margin: isDetail ? { t: 10, r: 30, b: bottomMargin, l: 70 } : { t: 5, r: 5, b: 25, l: 45 },
       font: { size: isDetail ? 12 : 10 },
@@ -65,17 +65,10 @@ VehicleReg.charts = {
   },
 
   _render: function(panelId, traces, layoutOverrides) {
-    var self = this;
     var div = this._chartDiv(panelId);
     if (!div) return;
-    var h = div.clientHeight;
-    if (h === 0) {
-      requestAnimationFrame(function() { self._render(panelId, traces, layoutOverrides); });
-      return;
-    }
     var isDetail = VehicleReg.state.view !== 'overview';
     var layout = Object.assign({}, this._layoutDefaults(panelId, isDetail), layoutOverrides || {});
-    layout.height = h;
     Plotly.react(div, traces, layout, { responsive: true, displayModeBar: isDetail });
   },
 
