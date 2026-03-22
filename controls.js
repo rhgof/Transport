@@ -187,7 +187,7 @@ VehicleReg.controls = {
         state.view = tab.id;
         VehicleReg.controls.updateViewBar();
         VehicleReg.controls.renderView();
-        VehicleReg.charts.updateAll();
+        requestAnimationFrame(function() { VehicleReg.charts.updateAll(); });
       });
       bar.appendChild(btn);
     });
@@ -229,7 +229,7 @@ VehicleReg.controls = {
         VehicleReg.state.view = id;
         self.updateViewBar();
         self.renderView();
-        VehicleReg.charts.updateAll();
+        requestAnimationFrame(function() { VehicleReg.charts.updateAll(); });
       });
       grid.appendChild(panel);
     });
@@ -284,8 +284,12 @@ VehicleReg.controls = {
     panel.appendChild(chartDiv);
 
     if (isDetail) {
+      var now = new Date();
+      var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      var dateStr = months[now.getMonth()] + ' ' + now.getFullYear();
       var footer = document.createElement('div');
       footer.className = 'vr-panel-footer';
+      footer.textContent = 'Source: BITRE - Road Vehicles - data.gov.au | @deadinlongrun.bsky.social | ' + dateStr;
       panel.appendChild(footer);
     }
 
