@@ -39,18 +39,19 @@ VehicleReg.charts = {
   },
 
   _layoutDefaults: function(panelId, isDetail) {
+    var legend;
+    if (panelId === 'age-profile') {
+      legend = { font: { size: 10 }, x: 0.01, y: 0.99, xanchor: 'left', yanchor: 'top', bgcolor: 'rgba(255,255,255,0.7)', traceorder: 'normal' };
+    } else if (panelId === 'comparison') {
+      legend = { font: { size: 10 }, x: 0.99, y: 0.99, xanchor: 'right', yanchor: 'top', bgcolor: 'rgba(255,255,255,0.7)', traceorder: 'normal' };
+    } else {
+      legend = { font: { size: 10 }, orientation: 'h', y: -0.08, x: 0.5, xanchor: 'center', traceorder: 'normal' };
+    }
     return {
-      margin: isDetail ? { t: 30, r: 30, b: 50, l: 70 } : { t: 5, r: 5, b: 30, l: 45 },
+      margin: isDetail ? { t: 20, r: 30, b: 35, l: 70 } : { t: 5, r: 5, b: 25, l: 45 },
       font: { size: isDetail ? 12 : 10 },
       showlegend: isDetail,
-      legend: {
-        font: { size: 10 },
-        orientation: 'h',
-        y: -0.15,
-        x: 0.5,
-        xanchor: 'center',
-        traceorder: 'normal'
-      },
+      legend: legend,
       hovermode: 'closest',
       plot_bgcolor: '#fff',
       paper_bgcolor: '#fff'
@@ -124,7 +125,7 @@ VehicleReg.charts = {
 
     this._render('composition', traces, {
       barmode: 'stack',
-      xaxis: { title: 'Census Year', dtick: 1 },
+      xaxis: { title: 'Year', dtick: 1 },
       yaxis: { title: 'Registrations' }
     });
   },
@@ -168,7 +169,7 @@ VehicleReg.charts = {
     });
 
     this._render('adoption-trends', traces, {
-      xaxis: { title: 'Census Year', dtick: 1 },
+      xaxis: { title: 'Year', dtick: 1 },
       yaxis: { title: state.adoptionYoY ? 'Change from Prior Year' : 'Registrations' }
     });
   },
@@ -195,7 +196,7 @@ VehicleReg.charts = {
 
     this._render('comparison', traces, {
       barmode: 'group',
-      xaxis: { title: 'Census Year', dtick: 1 },
+      xaxis: { title: 'Year', dtick: 1 },
       yaxis: { title: 'Registrations' }
     });
   }
