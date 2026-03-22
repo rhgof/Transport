@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Australian Vehicle Registration Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+  <div id="vehicle-reg-app" class="vr" data-csv-url="Inputs/rva-mvs-vehtype-mtvpwr-yom-rpc.csv"></div>
+  <script src="data.js"></script>
+  <script src="charts.js"></script>
+  <script src="controls.js"></script>
+  <script>VehicleReg.init('#vehicle-reg-app');</script>
+</body>
+</html>
