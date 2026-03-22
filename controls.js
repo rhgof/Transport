@@ -187,7 +187,7 @@ VehicleReg.controls = {
         state.view = tab.id;
         VehicleReg.controls.updateViewBar();
         VehicleReg.controls.renderView();
-        requestAnimationFrame(function() { VehicleReg.charts.updateAll(); });
+        VehicleReg.charts.updateAll();
       });
       bar.appendChild(btn);
     });
@@ -229,7 +229,7 @@ VehicleReg.controls = {
         VehicleReg.state.view = id;
         self.updateViewBar();
         self.renderView();
-        requestAnimationFrame(function() { VehicleReg.charts.updateAll(); });
+        VehicleReg.charts.updateAll();
       });
       grid.appendChild(panel);
     });

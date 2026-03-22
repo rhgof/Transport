@@ -65,12 +65,17 @@ VehicleReg.charts = {
   },
 
   _render: function(panelId, traces, layoutOverrides) {
+    var self = this;
     var div = this._chartDiv(panelId);
     if (!div) return;
+    var h = div.clientHeight;
+    if (h === 0) {
+      requestAnimationFrame(function() { self._render(panelId, traces, layoutOverrides); });
+      return;
+    }
     var isDetail = VehicleReg.state.view !== 'overview';
     var layout = Object.assign({}, this._layoutDefaults(panelId, isDetail), layoutOverrides || {});
-    var h = div.clientHeight;
-    if (h > 0) layout.height = h;
+    layout.height = h;
     Plotly.react(div, traces, layout, { responsive: true, displayModeBar: isDetail });
   },
 
