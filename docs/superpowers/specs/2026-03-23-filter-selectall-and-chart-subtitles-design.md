@@ -34,6 +34,10 @@ Called:
 
 Both paths trigger `VehicleReg.charts.updateAll()`.
 
+**Empty state**: Deselecting all items in both groups is allowed. Charts render with empty traces (blank Plotly chart). This is consistent with existing behavior — individual checkboxes can already be unchecked to reach this state. No special empty-state message needed; the select-all checkbox simply makes it faster to get there and back.
+
+**Accessibility**: Set `aria-checked="mixed"` on the checkbox when in indeterminate state for screen reader support.
+
 ### Styling
 
 Same appearance as existing filter item checkboxes. Inline with the group title label.
@@ -82,7 +86,11 @@ To (detail only):
 [subtitle line 2   ]
 ```
 
-`updateSubtitle(panelId)` is called from `updatePanel()` and `updateAll()` to refresh the subtitle innerHTML.
+`updateSubtitle(panelId)` is called from `charts.updatePanel()` and `charts.updateAll()`. Since those methods live in `charts.js`, they call `VehicleReg.controls.updateSubtitle(panelId)` at the end of each render. The subtitle element is found by ID, so if it doesn't exist (overview mode), the call is a no-op.
+
+**Label mapping**: A constant `GROUP_LABELS = { motive_power: 'Motive Power', vehicle_type: 'Vehicle Type' }` in `controls.js` provides human-readable names for `groupBy` values.
+
+**Overview panels**: The panel header DOM structure in overview mode is unchanged — no subtitle div or wrapper is added.
 
 ### Styling
 
