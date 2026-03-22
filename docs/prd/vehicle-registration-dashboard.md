@@ -37,8 +37,15 @@ Interactive browser-based dashboard for exploring Australian vehicle registratio
 - Options within each group flow left to right (horizontally), wrapping as needed
 - Sorted by total registration count (highest first)
 - Colors are stable/fixed per value (same color always maps to same category)
+- Each group has a select all/none checkbox in the title row
+- Tri-state: checked (all), unchecked (none), indeterminate dash (some)
+- Click toggles between all selected and none selected
 
 ## Chart Panels (display order)
+
+- Detail view panels show a dynamic subtitle below the title
+- Line 1: panel-specific control state (year, group-by, mode)
+- Line 2: shared filter summary (lists names if ≤3 selected, count otherwise)
 
 ### Panel 1: Fleet Age Profile
 - Stacked bar chart
