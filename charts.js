@@ -34,6 +34,8 @@ VehicleReg.charts = {
       case 'adoption-trends': this.renderAdoptionTrends(filtered, s); break;
       case 'comparison': this.renderComparison(filtered, s); break;
     }
+
+    VehicleReg.controls.updateSubtitle(panelId);
   },
 
   _layoutDefaults: function(panelId, isDetail) {
