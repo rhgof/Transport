@@ -64,33 +64,16 @@ VehicleReg.charts = {
     return document.getElementById('vr-chart-' + panelId);
   },
 
-  _calcChartHeight: function(panelId) {
-    var container = VehicleReg.container;
-    if (!container) return 400;
-    // Force layout reflow so measurements are accurate
-    container.offsetHeight;
-    var header = container.querySelector('.vr-header');
-    var viewBar = document.getElementById('vr-view-bar');
-    var filters = document.getElementById('vr-filters-container');
-    var panelHeader = container.querySelector('.vr-panel-header');
-    var panelFooter = container.querySelector('.vr-panel-footer');
-    var used = 0;
-    if (header) used += header.offsetHeight;
-    if (viewBar) used += viewBar.offsetHeight;
-    if (filters) used += filters.offsetHeight;
-    if (panelHeader) used += panelHeader.offsetHeight;
-    if (panelFooter) used += panelFooter.offsetHeight;
-    used += 30; // padding and borders
-    return Math.max(200, window.innerHeight - used);
-  },
-
   _render: function(panelId, traces, layoutOverrides) {
     var div = this._chartDiv(panelId);
     if (!div) return;
     var isDetail = VehicleReg.state.view !== 'overview';
     var layout = Object.assign({}, this._layoutDefaults(panelId, isDetail), layoutOverrides || {});
     if (isDetail) {
-      layout.height = this._calcChartHeight(panelId);
+      // Force browser to compute flex layout before measuring
+      div.parentElement.offsetHeight;
+      var h = div.offsetHeight;
+      if (h > 0) layout.height = h;
     }
     Plotly.react(div, traces, layout, { responsive: true, displayModeBar: isDetail });
   },
