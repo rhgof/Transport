@@ -223,9 +223,6 @@ body {
   min-height: 0;
 }
 
-.vr-detail .vr-panel-chart {
-  height: calc(100vh - 300px);
-}
 
 .vr-panel-footer {
   flex-shrink: 0;
