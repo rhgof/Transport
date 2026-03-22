@@ -354,16 +354,17 @@ VehicleReg.controls = {
     }
   },
 
-  _filterSummary: function(selectedMap, options, groupName) {
+  _filterSummary: function(selectedMap, options, label) {
     var count = 0;
     var names = [];
     options.forEach(function(opt) {
       if (selectedMap[opt]) { count++; names.push(opt); }
     });
-    if (count === options.length) return 'All ' + groupName;
-    if (count === 0) return 'No ' + groupName;
-    if (count <= 3) return names.join(', ');
-    return count + ' of ' + options.length + ' ' + groupName;
+    if (count === options.length) return label + ': All';
+    if (count === 0) return label + ': None';
+    var shown = names.slice(0, 4).join(', ');
+    if (names.length > 4) shown += ' etc.';
+    return label + ': ' + shown + ' (' + count + ' of ' + options.length + ')';
   },
 
   getSubtitle: function(panelId) {
@@ -385,8 +386,8 @@ VehicleReg.controls = {
         break;
     }
 
-    var mpSummary = this._filterSummary(state.selectedMotivePowers, state.metadata.motivePowers, 'motive powers');
-    var vtSummary = this._filterSummary(state.selectedVehicleTypes, state.metadata.vehicleTypes, 'vehicle types');
+    var mpSummary = this._filterSummary(state.selectedMotivePowers, state.metadata.motivePowers, 'Motive Power');
+    var vtSummary = this._filterSummary(state.selectedVehicleTypes, state.metadata.vehicleTypes, 'Vehicle Type');
     var line2 = mpSummary + ' \u00b7 ' + vtSummary;
 
     return line1 + '<br>' + line2;

@@ -45,7 +45,7 @@ Interactive browser-based dashboard for exploring Australian vehicle registratio
 
 - Detail view panels show a dynamic subtitle below the title
 - Line 1: panel-specific control state (year, group-by, mode)
-- Line 2: shared filter summary (lists names if ≤3 selected, count otherwise)
+- Line 2: shared filter summary prefixed with filter name (e.g. "Motive Power: Petrol, Diesel (2 of 6)"), lists up to 4 names with "etc." if more, shows "All" or "None" for those states
 
 ### Panel 1: Fleet Age Profile
 - Stacked bar chart
