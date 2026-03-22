@@ -65,21 +65,19 @@ VehicleReg.charts = {
   },
 
   _calcChartHeight: function(panelId) {
-    // Measure space taken by everything above and below the chart
+    // Measure space taken by everything above the chart, plus fixed footer
     var container = VehicleReg.container;
     if (!container) return 400;
     var header = container.querySelector('.vr-header');
     var viewBar = document.getElementById('vr-view-bar');
     var filters = document.getElementById('vr-filters-container');
     var panelHeader = container.querySelector('.vr-panel-header');
-    var panelFooter = container.querySelector('.vr-panel-footer');
     var used = 0;
     if (header) used += header.offsetHeight;
     if (viewBar) used += viewBar.offsetHeight;
     if (filters) used += filters.offsetHeight;
     if (panelHeader) used += panelHeader.offsetHeight;
-    if (panelFooter) used += panelFooter.offsetHeight;
-    used += 30; // padding and borders
+    used += 60; // footer (~30px) + padding/borders (~30px)
     return Math.max(200, window.innerHeight - used);
   },
 
