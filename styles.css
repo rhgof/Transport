@@ -33,6 +33,12 @@ body {
   margin-top: 2px;
 }
 
+.vr-header .vr-source {
+  font-size: 10px;
+  opacity: 0.6;
+  margin-top: 2px;
+}
+
 /* View tabs (above filters) */
 .vr-view-bar {
   flex-shrink: 0;
@@ -65,7 +71,7 @@ body {
   border-color: #1a365d;
 }
 
-/* Filter bar (below tabs) — vertical stacking */
+/* Filter bar (below tabs) — groups stacked vertically, options flow horizontally */
 .vr-filters {
   flex-shrink: 0;
   padding: 10px 20px;
@@ -73,7 +79,7 @@ body {
   border-bottom: 1px solid #d0d7de;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .vr-filter-group {
@@ -92,13 +98,9 @@ body {
 
 .vr-filter-options {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  gap: 6px;
-}
-
-/* Vehicle type filter can use more width — two-column flow */
-.vr-filter-options--wide {
-  max-width: 100%;
+  gap: 4px;
 }
 
 .vr-filter-options label {

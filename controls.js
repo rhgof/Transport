@@ -58,8 +58,12 @@ VehicleReg.controls = {
 
     var header = document.createElement('div');
     header.className = 'vr-header';
+    var now = new Date();
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var dateStr = months[now.getMonth()] + ' ' + now.getFullYear();
     header.innerHTML = '<h1>Australian Vehicle Registration Dashboard</h1>' +
-      '<p>Registered motor vehicles by type, motive power, and year of manufacture</p>';
+      '<p>Registered motor vehicles by type, motive power, and year of manufacture</p>' +
+      '<div class="vr-source">Source: BITRE - Road Vehicles - data.gov.au | @deadinlongrun.bsky.social | ' + dateStr + '</div>';
     c.appendChild(header);
 
     c.appendChild(this.buildViewBar());
@@ -110,10 +114,6 @@ VehicleReg.controls = {
 
     var optionsDiv = document.createElement('div');
     optionsDiv.className = 'vr-filter-options';
-    if (groupField === 'vehicle_type') {
-      optionsDiv.classList.add('vr-filter-options--wide');
-    }
-
     options.forEach(function(opt) {
       var lbl = document.createElement('label');
 

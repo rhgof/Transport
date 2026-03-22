@@ -26,10 +26,15 @@ Interactive browser-based dashboard for exploring Australian vehicle registratio
 - Overview: 4 chart panels in a 2x2 grid — click any panel to drill in
 - Detail: tabbed navigation between panels, full-size chart with mode bar and legend
 
+## Header
+- Title, subtitle, and source attribution line
+- Source: `BITRE - Road Vehicles - data.gov.au | @deadinlongrun.bsky.social | <month> <year>`
+
 ## Filters (shared, below tabs)
-- **Motive Power** (first row): multi-select checkboxes with colored dots
-- **Vehicle Type** (second row, wraps to two columns): multi-select checkboxes with colored dots
-- Stacked vertically (Motive Power above Vehicle Type)
+- **Motive Power** (first row): multi-select checkboxes with colored dots, flowing horizontally
+- **Vehicle Type** (second row): multi-select checkboxes with colored dots, flowing horizontally (wraps)
+- Groups stacked vertically (Motive Power above Vehicle Type)
+- Options within each group flow side-by-side (horizontal)
 - Sorted by total registration count (highest first)
 - Colors are stable/fixed per value (same color always maps to same category)
 
