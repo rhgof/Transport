@@ -48,6 +48,12 @@ VehicleReg.init = function(selector) {
 
     VehicleReg.controls.renderShell();
     VehicleReg.charts.updateAll();
+
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() { VehicleReg.charts.updateAll(); }, 150);
+    });
   });
 };
 
@@ -276,6 +282,12 @@ VehicleReg.controls = {
     chartDiv.className = 'vr-panel-chart';
     chartDiv.id = 'vr-chart-' + panelId;
     panel.appendChild(chartDiv);
+
+    if (isDetail) {
+      var footer = document.createElement('div');
+      footer.className = 'vr-panel-footer';
+      panel.appendChild(footer);
+    }
 
     return panel;
   },
