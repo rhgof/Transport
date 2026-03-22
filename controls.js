@@ -52,6 +52,8 @@ VehicleReg.init = function(selector) {
 };
 
 VehicleReg.controls = {
+  GROUP_LABELS: { motive_power: 'Motive Power', vehicle_type: 'Vehicle Type' },
+
   renderShell: function() {
     var c = VehicleReg.container;
     c.innerHTML = '';
@@ -334,6 +336,50 @@ VehicleReg.controls = {
       container.appendChild(document.createTextNode('Group: '));
       container.appendChild(grpSel2);
     }
+  },
+
+  _filterSummary: function(selectedMap, options, groupName) {
+    var count = 0;
+    var names = [];
+    options.forEach(function(opt) {
+      if (selectedMap[opt]) { count++; names.push(opt); }
+    });
+    if (count === options.length) return 'All ' + groupName;
+    if (count === 0) return 'No ' + groupName;
+    if (count <= 3) return names.join(', ');
+    return count + ' of ' + options.length + ' ' + groupName;
+  },
+
+  getSubtitle: function(panelId) {
+    var state = VehicleReg.state;
+    var line1 = '';
+
+    switch (panelId) {
+      case 'age-profile':
+        line1 = state.ageProfileYear + ' \u00b7 by ' + this.GROUP_LABELS[state.ageProfileGroupBy];
+        break;
+      case 'composition':
+        line1 = 'by ' + this.GROUP_LABELS[state.compositionGroupBy];
+        break;
+      case 'adoption-trends':
+        line1 = state.adoptionYoY ? 'Year-over-Year Change' : 'Total Registrations';
+        break;
+      case 'comparison':
+        line1 = 'by ' + this.GROUP_LABELS[state.comparisonGroupBy];
+        break;
+    }
+
+    var mpSummary = this._filterSummary(state.selectedMotivePowers, state.metadata.motivePowers, 'motive powers');
+    var vtSummary = this._filterSummary(state.selectedVehicleTypes, state.metadata.vehicleTypes, 'vehicle types');
+    var line2 = mpSummary + ' \u00b7 ' + vtSummary;
+
+    return line1 + '<br>' + line2;
+  },
+
+  updateSubtitle: function(panelId) {
+    var el = document.getElementById('vr-subtitle-' + panelId);
+    if (!el) return;
+    el.innerHTML = this.getSubtitle(panelId);
   },
 
   _buildSelect: function(options, currentValue, onChange) {
