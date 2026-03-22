@@ -65,23 +65,23 @@ VehicleReg.charts = {
   },
 
   _render: function(panelId, traces, layoutOverrides) {
+    var self = this;
     var div = this._chartDiv(panelId);
     if (!div) return;
     var isDetail = VehicleReg.state.view !== 'overview';
     var layout = Object.assign({}, this._layoutDefaults(panelId, isDetail), layoutOverrides || {});
     if (isDetail) {
-      // Compute available height: panel height minus header and footer
       var panel = div.parentElement;
-      panel.offsetHeight; // force reflow
       var panelH = panel.offsetHeight;
-      var headerH = 0;
-      var footerH = 0;
+      if (panelH < 100) {
+        // Layout not yet computed — defer render
+        setTimeout(function() { self._render(panelId, traces, layoutOverrides); }, 0);
+        return;
+      }
       var header = panel.querySelector('.vr-panel-header');
       var footer = panel.querySelector('.vr-panel-footer');
-      if (header) headerH = header.offsetHeight;
-      if (footer) footerH = footer.offsetHeight;
-      var chartH = panelH - headerH - footerH;
-      if (chartH > 100) layout.height = chartH;
+      var chartH = panelH - (header ? header.offsetHeight : 0) - (footer ? footer.offsetHeight : 0);
+      layout.height = chartH;
     }
     Plotly.react(div, traces, layout, { responsive: true, displayModeBar: isDetail });
   },
