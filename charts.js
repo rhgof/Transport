@@ -83,7 +83,12 @@ VehicleReg.charts = {
       var chartH = panelH - (header ? header.offsetHeight : 0) - (footer ? footer.offsetHeight : 0);
       layout.height = chartH;
     }
-    Plotly.react(div, traces, layout, { responsive: true, displayModeBar: isDetail });
+    Plotly.react(div, traces, layout, { responsive: true, displayModeBar: isDetail }).then(function() {
+      if (isDetail) {
+        // Plotly's automargin needs a second pass to correctly size legends/axis titles
+        setTimeout(function() { Plotly.Plots.resize(div); }, 0);
+      }
+    });
   },
 
   // Panel 1: Fleet Age Profile — stacked bars by year of manufacture
@@ -114,8 +119,8 @@ VehicleReg.charts = {
 
     this._render('age-profile', traces, {
       barmode: 'stack',
-      xaxis: { title: 'Year of Manufacture', range: [minYom - 0.5, state.metadata.yomRange.max + 0.5] },
-      yaxis: { title: 'Registrations' }
+      xaxis: { title: { text: 'Year of Manufacture', automargin: true }, range: [minYom - 0.5, state.metadata.yomRange.max + 0.5] },
+      yaxis: { title: { text: 'Registrations', automargin: true } }
     });
   },
 
@@ -141,8 +146,8 @@ VehicleReg.charts = {
 
     this._render('composition', traces, {
       barmode: 'stack',
-      xaxis: { title: 'Year', dtick: 1 },
-      yaxis: { title: 'Registrations' }
+      xaxis: { title: { text: 'Year', automargin: true }, dtick: 1 },
+      yaxis: { title: { text: 'Registrations', automargin: true } }
     });
   },
 
@@ -185,8 +190,8 @@ VehicleReg.charts = {
     });
 
     this._render('adoption-trends', traces, {
-      xaxis: { title: 'Year', dtick: 1 },
-      yaxis: { title: state.adoptionYoY ? 'Change from Prior Year' : 'Registrations' }
+      xaxis: { title: { text: 'Year', automargin: true }, dtick: 1 },
+      yaxis: { title: { text: state.adoptionYoY ? 'Change from Prior Year' : 'Registrations', automargin: true } }
     });
   },
 
@@ -212,8 +217,8 @@ VehicleReg.charts = {
 
     this._render('comparison', traces, {
       barmode: 'group',
-      xaxis: { title: 'Year', dtick: 1 },
-      yaxis: { title: 'Registrations' }
+      xaxis: { title: { text: 'Year', automargin: true }, dtick: 1 },
+      yaxis: { title: { text: 'Registrations', automargin: true } }
     });
   }
 };
