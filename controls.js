@@ -107,13 +107,32 @@ VehicleReg.controls = {
     var group = document.createElement('div');
     group.className = 'vr-filter-group';
 
-    var label = document.createElement('label');
-    label.className = 'vr-filter-title';
-    label.textContent = title;
-    group.appendChild(label);
+    var self = this;
+
+    var titleRow = document.createElement('div');
+    titleRow.className = 'vr-filter-title';
+
+    var groupCb = document.createElement('input');
+    groupCb.type = 'checkbox';
+
+    var titleSpan = document.createElement('span');
+    titleSpan.textContent = title;
+    titleRow.appendChild(groupCb);
+    titleRow.appendChild(titleSpan);
+    group.appendChild(titleRow);
 
     var optionsDiv = document.createElement('div');
     optionsDiv.className = 'vr-filter-options';
+
+    groupCb.addEventListener('change', function() {
+      var setTo = groupCb.checked;
+      options.forEach(function(opt) { selectedMap[opt] = setTo; });
+      var itemCbs = optionsDiv.querySelectorAll('input[type="checkbox"]');
+      itemCbs.forEach(function(cb, i) { cb.checked = setTo; });
+      self._syncGroupCheckbox(groupCb, selectedMap, options);
+      VehicleReg.charts.updateAll();
+    });
+
     options.forEach(function(opt) {
       var lbl = document.createElement('label');
 
@@ -127,12 +146,15 @@ VehicleReg.controls = {
       cb.checked = !!selectedMap[opt];
       cb.addEventListener('change', function() {
         selectedMap[opt] = cb.checked;
+        self._syncGroupCheckbox(groupCb, selectedMap, options);
         VehicleReg.charts.updateAll();
       });
       lbl.appendChild(cb);
       lbl.appendChild(document.createTextNode(' ' + opt));
       optionsDiv.appendChild(lbl);
     });
+
+    this._syncGroupCheckbox(groupCb, selectedMap, options);
 
     group.appendChild(optionsDiv);
     return group;
@@ -334,5 +356,23 @@ VehicleReg.controls = {
       onChange(sel.value);
     });
     return sel;
+  },
+
+  _syncGroupCheckbox: function(checkbox, selectedMap, options) {
+    var count = 0;
+    options.forEach(function(opt) { if (selectedMap[opt]) count++; });
+    if (count === 0) {
+      checkbox.checked = false;
+      checkbox.indeterminate = false;
+      checkbox.removeAttribute('aria-checked');
+    } else if (count === options.length) {
+      checkbox.checked = true;
+      checkbox.indeterminate = false;
+      checkbox.removeAttribute('aria-checked');
+    } else {
+      checkbox.checked = false;
+      checkbox.indeterminate = true;
+      checkbox.setAttribute('aria-checked', 'mixed');
+    }
   }
 };
