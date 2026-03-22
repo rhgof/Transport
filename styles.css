@@ -140,7 +140,7 @@ body {
 .vr-main {
   flex: 1;
   min-height: 0;
-  overflow: hidden;
+  overflow: auto;
   padding: 10px;
 }
 
@@ -221,6 +221,7 @@ body {
 .vr-panel-chart {
   flex: 1;
   min-height: 0;
+  max-height: calc(100vh - 280px);
 }
 
 /* Detail view (single panel full size) */

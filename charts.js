@@ -40,15 +40,17 @@ VehicleReg.charts = {
 
   _layoutDefaults: function(panelId, isDetail) {
     var legend;
+    var hasBottomLegend = (panelId === 'composition' || panelId === 'adoption-trends');
     if (panelId === 'age-profile') {
       legend = { font: { size: 10 }, x: 0.01, y: 0.99, xanchor: 'left', yanchor: 'top', bgcolor: 'rgba(255,255,255,0.7)', traceorder: 'normal' };
     } else if (panelId === 'comparison') {
       legend = { font: { size: 10 }, x: 0.99, y: 0.99, xanchor: 'right', yanchor: 'top', bgcolor: 'rgba(255,255,255,0.7)', traceorder: 'normal' };
     } else {
-      legend = { font: { size: 10 }, orientation: 'h', y: -0.08, x: 0.5, xanchor: 'center', traceorder: 'normal' };
+      legend = { font: { size: 10 }, orientation: 'h', y: -0.18, x: 0.5, xanchor: 'center', traceorder: 'normal' };
     }
+    var bottomMargin = isDetail ? (hasBottomLegend ? 70 : 40) : 25;
     return {
-      margin: isDetail ? { t: 20, r: 30, b: 35, l: 70 } : { t: 5, r: 5, b: 25, l: 45 },
+      margin: isDetail ? { t: 10, r: 30, b: bottomMargin, l: 70 } : { t: 5, r: 5, b: 25, l: 45 },
       font: { size: isDetail ? 12 : 10 },
       showlegend: isDetail,
       legend: legend,
