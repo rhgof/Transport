@@ -232,6 +232,7 @@ body {
 
 .vr-detail .vr-panel {
   flex: 1;
+  min-height: 0;
   cursor: default;
 }
 

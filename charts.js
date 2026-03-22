@@ -67,6 +67,8 @@ VehicleReg.charts = {
     if (!div) return;
     var isDetail = VehicleReg.state.view !== 'overview';
     var layout = Object.assign({}, this._layoutDefaults(panelId, isDetail), layoutOverrides || {});
+    var h = div.clientHeight;
+    if (h > 0) layout.height = h;
     Plotly.react(div, traces, layout, { responsive: true, displayModeBar: isDetail });
   },
 
