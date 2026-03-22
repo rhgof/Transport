@@ -71,15 +71,16 @@ body {
   border-color: #1a365d;
 }
 
-/* Filter bar (below tabs) — groups stacked vertically, options flow horizontally */
+/* Filter bar (below tabs) — two columns side by side */
 .vr-filters {
   flex-shrink: 0;
   padding: 10px 20px;
   background: #f0f4f8;
   border-bottom: 1px solid #d0d7de;
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  flex-direction: row;
+  gap: 24px;
+  align-items: flex-start;
 }
 
 .vr-filter-group {
@@ -98,9 +99,8 @@ body {
 
 .vr-filter-options {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 4px;
+  flex-direction: column;
+  gap: 3px;
 }
 
 .vr-filter-options label {
