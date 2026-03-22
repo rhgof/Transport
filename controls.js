@@ -245,9 +245,25 @@ VehicleReg.controls = {
     var header = document.createElement('div');
     header.className = 'vr-panel-header';
 
-    var title = document.createElement('h3');
-    title.textContent = VehicleReg.charts.PANEL_TITLES[panelId];
-    header.appendChild(title);
+    if (isDetail) {
+      var titleBlock = document.createElement('div');
+      titleBlock.className = 'vr-panel-title-block';
+
+      var title = document.createElement('h3');
+      title.textContent = VehicleReg.charts.PANEL_TITLES[panelId];
+      titleBlock.appendChild(title);
+
+      var subtitle = document.createElement('div');
+      subtitle.className = 'vr-panel-subtitle';
+      subtitle.id = 'vr-subtitle-' + panelId;
+      titleBlock.appendChild(subtitle);
+
+      header.appendChild(titleBlock);
+    } else {
+      var title = document.createElement('h3');
+      title.textContent = VehicleReg.charts.PANEL_TITLES[panelId];
+      header.appendChild(title);
+    }
 
     var controls = document.createElement('div');
     controls.className = 'vr-panel-controls';

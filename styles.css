@@ -184,6 +184,22 @@ body {
   color: #1a365d;
 }
 
+.vr-panel-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.vr-panel-subtitle {
+  font-size: 11px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.vr-detail .vr-panel-header {
+  align-items: flex-start;
+}
+
 .vr-panel-controls {
   display: flex;
   gap: 6px;
