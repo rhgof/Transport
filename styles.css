@@ -1,9 +1,14 @@
+/* =============================================================================
+   Vehicle Registration Dashboard — All styles scoped with .vr- prefix
+   Requires dashboard-theme.css loaded first for design tokens.
+   ============================================================================= */
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: #f5f5f5;
-  color: #333;
+  font-family: var(--dash-font-family);
+  background: var(--dash-bg-page);
+  color: var(--dash-color-text);
 }
 
 .vr {
@@ -11,30 +16,30 @@ body {
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
-  background: #fff;
+  background: var(--dash-bg-surface);
 }
 
 /* Header */
 .vr-header {
   flex-shrink: 0;
-  padding: 12px 20px;
-  background: #1a365d;
-  color: #fff;
+  padding: var(--dash-spacing-lg) var(--dash-spacing-2xl);
+  background: var(--dash-color-primary);
+  color: var(--dash-color-primary-text);
 }
 
 .vr-header h1 {
-  font-size: 18px;
+  font-size: var(--dash-font-size-title);
   font-weight: 600;
 }
 
 .vr-header p {
-  font-size: 12px;
+  font-size: var(--dash-font-size-body-sm);
   opacity: 0.8;
   margin-top: 2px;
 }
 
 .vr-header .vr-source {
-  font-size: 10px;
+  font-size: var(--dash-font-size-caption);
   opacity: 0.6;
   margin-top: 2px;
 }
@@ -42,60 +47,60 @@ body {
 /* View tabs (above filters) */
 .vr-view-bar {
   flex-shrink: 0;
-  padding: 6px 20px;
-  background: #fff;
-  border-bottom: 1px solid #d0d7de;
+  padding: var(--dash-spacing-sm) var(--dash-spacing-2xl);
+  background: var(--dash-bg-surface);
+  border-bottom: 1px solid var(--dash-border-color);
   display: flex;
-  gap: 4px;
+  gap: var(--dash-spacing-xs);
   align-items: center;
 }
 
 .vr-view-tab {
-  font-size: 12px;
-  padding: 4px 12px;
-  border: 1px solid #d0d7de;
-  background: #fff;
+  font-size: var(--dash-font-size-body-sm);
+  padding: var(--dash-spacing-xs) var(--dash-spacing-lg);
+  border: 1px solid var(--dash-border-color);
+  background: var(--dash-bg-surface);
   cursor: pointer;
-  border-radius: 4px;
-  color: #555;
-  transition: all 0.15s;
+  border-radius: var(--dash-border-radius-sm);
+  color: var(--dash-color-text-secondary);
+  transition: all var(--dash-transition-fast);
 }
 
 .vr-view-tab:hover {
-  background: #e8edf2;
+  background: var(--dash-bg-hover);
 }
 
 .vr-view-tab.active {
-  background: #1a365d;
-  color: #fff;
-  border-color: #1a365d;
+  background: var(--dash-color-primary);
+  color: var(--dash-color-primary-text);
+  border-color: var(--dash-color-primary);
 }
 
-/* Filter bar (below tabs) — groups stacked vertically, items flow horizontally */
+/* Filter bar */
 .vr-filters {
   flex-shrink: 0;
-  padding: 10px 20px;
-  background: #f0f4f8;
-  border-bottom: 1px solid #d0d7de;
+  padding: 10px var(--dash-spacing-2xl);
+  background: var(--dash-bg-filter);
+  border-bottom: 1px solid var(--dash-border-color);
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--dash-spacing-sm);
 }
 
 .vr-filter-group {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--dash-spacing-xs);
 }
 
 .vr-filter-group .vr-filter-title {
   display: flex;
   align-items: center;
-  gap: 4px;
-  font-size: 11px;
+  gap: var(--dash-spacing-xs);
+  font-size: var(--dash-font-size-label);
   font-weight: 700;
   text-transform: uppercase;
-  color: #555;
+  color: var(--dash-color-text-secondary);
   letter-spacing: 0.5px;
 }
 
@@ -103,24 +108,24 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: var(--dash-spacing-xs);
 }
 
 .vr-filter-options label {
-  font-size: 12px;
+  font-size: var(--dash-font-size-body-sm);
   display: flex;
   align-items: center;
   gap: 3px;
   cursor: pointer;
   padding: 2px 6px;
-  border-radius: 3px;
-  background: #fff;
-  border: 1px solid #d0d7de;
-  transition: background 0.15s;
+  border-radius: var(--dash-border-radius-xs);
+  background: var(--dash-bg-surface);
+  border: 1px solid var(--dash-border-color);
+  transition: background var(--dash-transition-fast);
 }
 
 .vr-filter-options label:hover {
-  background: #e8edf2;
+  background: var(--dash-bg-hover);
 }
 
 .vr-filter-options input[type="checkbox"] {
@@ -154,34 +159,34 @@ body {
 }
 
 .vr-panel {
-  background: #fff;
-  border: 1px solid #d0d7de;
-  border-radius: 6px;
+  background: var(--dash-bg-surface);
+  border: 1px solid var(--dash-border-color);
+  border-radius: var(--dash-border-radius);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   cursor: pointer;
-  transition: box-shadow 0.15s;
+  transition: box-shadow var(--dash-transition-fast);
 }
 
 .vr-panel:hover {
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  box-shadow: var(--dash-shadow-hover);
 }
 
 .vr-panel-header {
   flex-shrink: 0;
-  padding: 8px 12px;
-  background: #f8fafc;
-  border-bottom: 1px solid #e8ecf0;
+  padding: var(--dash-spacing-md) var(--dash-spacing-lg);
+  background: var(--dash-bg-panel-header);
+  border-bottom: 1px solid var(--dash-border-light);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .vr-panel-header h3 {
-  font-size: 13px;
+  font-size: var(--dash-font-size-panel-title);
   font-weight: 600;
-  color: #1a365d;
+  color: var(--dash-color-primary);
 }
 
 .vr-panel-title-block {
@@ -191,8 +196,8 @@ body {
 }
 
 .vr-panel-subtitle {
-  font-size: 11px;
-  color: #666;
+  font-size: var(--dash-font-size-label);
+  color: var(--dash-color-text-muted);
   line-height: 1.4;
 }
 
@@ -202,19 +207,19 @@ body {
 
 .vr-panel-controls {
   display: flex;
-  gap: 6px;
+  gap: var(--dash-spacing-sm);
   align-items: center;
-  font-size: 11px;
-  color: #555;
+  font-size: var(--dash-font-size-label);
+  color: var(--dash-color-text-secondary);
 }
 
 .vr-panel-controls select,
 .vr-panel-controls button {
-  font-size: 11px;
+  font-size: var(--dash-font-size-label);
   padding: 2px 6px;
-  border: 1px solid #d0d7de;
-  border-radius: 3px;
-  background: #fff;
+  border: 1px solid var(--dash-border-color);
+  border-radius: var(--dash-border-radius-xs);
+  background: var(--dash-bg-surface);
   cursor: pointer;
 }
 
@@ -223,14 +228,13 @@ body {
   min-height: 0;
 }
 
-
 .vr-panel-footer {
   flex-shrink: 0;
-  padding: 8px 12px;
-  background: #f8fafc;
-  border-top: 1px solid #e8ecf0;
-  font-size: 10px;
-  color: #888;
+  padding: var(--dash-spacing-md) var(--dash-spacing-lg);
+  background: var(--dash-bg-panel-header);
+  border-top: 1px solid var(--dash-border-light);
+  font-size: var(--dash-font-size-caption);
+  color: var(--dash-color-text-faint);
   text-align: right;
 }
 
@@ -257,8 +261,8 @@ body {
   align-items: center;
   justify-content: center;
   height: 100%;
-  font-size: 14px;
-  color: #888;
+  font-size: var(--dash-font-size-base);
+  color: var(--dash-color-text-faint);
 }
 
 .vr-error {
@@ -266,7 +270,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 100%;
-  font-size: 14px;
+  font-size: var(--dash-font-size-base);
   color: #c53030;
 }
 
